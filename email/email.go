@@ -7,7 +7,6 @@ import (
 )
 
 const (
-	mainMargin    = 0
 	sectionMargin = 10
 	mainWidth     = 600
 )
@@ -23,7 +22,9 @@ var (
 // i.e. the attributes and elements you pass in end up in that final td wrapper
 func Html(attrs a.Attributes, sections ...h.Element) h.Element {
 	return h.Html(
-		a.Attrs(a.Xmlns("http://www.w3.org/1999/xhtml")),
+		a.Attrs(
+			a.Xmlns("http://www.w3.org/1999/xhtml"),
+		),
 		h.Head(
 			a.Attrs(),
 			h.Meta(a.Attrs(
@@ -40,24 +41,24 @@ func Html(attrs a.Attributes, sections ...h.Element) h.Element {
 			a.Attrs(
 				a.Style(
 					css.Margin(css.Zero),
-					css.BackgroundColor(neutralGrey),
 				),
 			),
 			h.Table(
 				a.Attrs(
-					a.CellPadding(mainMargin),
-					a.Width(css.NoUnits(mainWidth)),
+					a.CellPadding(0),
+					a.CellSpacing(0),
+					a.Width(css.WithUnits(100, css.Percent)),
 					a.Style(
+						css.BackgroundColor(neutralGrey),
 						css.BorderCollapse(css.Collapse),
-						css.MarginLeft(css.Auto),
-						css.MarginRight(css.Auto),
 					),
 				),
 				h.Tr(
 					a.Attrs(),
 					h.Td(
-						a.Attrs1(
+						a.Attrs2(
 							a.Width(css.WithUnits(100, css.Percent)),
+							a.Align(css.Center),
 							attrs,
 						),
 						h.Table(
@@ -65,8 +66,8 @@ func Html(attrs a.Attributes, sections ...h.Element) h.Element {
 								a.CellPadding(sectionMargin),
 								a.CellSpacing(0),
 								a.Style(
-									css.Margin(css.Zero),
 									css.BackgroundColor(white),
+									css.MaxWidth(css.WithUnits(mainWidth, css.Px)),
 								),
 							),
 							sections...,
