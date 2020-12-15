@@ -7,9 +7,14 @@ import (
 )
 
 const (
-	mainMargin    = 5
-	sectionMargin = 5
+	mainMargin    = 0
+	sectionMargin = 10
 	mainWidth     = 600
+)
+
+var (
+	white       = css.RGB(255, 255, 255)
+	neutralGrey = css.RGB(240, 240, 240)
 )
 
 // Html is a somewhat opinionated attempt at standardising a wrapper that works well across clients and can be resused for all emails
@@ -35,6 +40,7 @@ func Html(attrs a.Attributes, sections ...h.Element) h.Element {
 			a.Attrs(
 				a.Style(
 					css.Margin(css.Zero),
+					css.BackgroundColor(neutralGrey),
 				),
 			),
 			h.Table(
@@ -57,6 +63,11 @@ func Html(attrs a.Attributes, sections ...h.Element) h.Element {
 						h.Table(
 							a.Attrs(
 								a.CellPadding(sectionMargin),
+								a.CellSpacing(0),
+								a.Style(
+									css.Margin(css.Zero),
+									css.BackgroundColor(white),
+								),
 							),
 							sections...,
 						),
