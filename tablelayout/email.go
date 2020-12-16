@@ -7,8 +7,8 @@ import (
 )
 
 const (
-	sectionMargin = 10
-	mainWidth     = 600
+	emailSectionMargin = 10
+	emailMainWidth     = 600
 )
 
 var (
@@ -66,13 +66,13 @@ func Email(attrs a.Attributes, sections ...h.Element) h.Element {
 						),
 						h.Table(
 							a.Attrs(
-								a.CellPadding(sectionMargin),
+								a.CellPadding(emailSectionMargin),
 								a.CellSpacing(0),
 								a.Style(
 									css.BackgroundColor(white),
 
 									// Important to use max-width here in order to avoid scaling on mobile devices
-									css.MaxWidth(css.WithUnits(mainWidth, css.Px)),
+									css.MaxWidth(css.WithUnits(emailMainWidth, css.Px)),
 								),
 							),
 							sections...,
