@@ -1,4 +1,4 @@
-package email
+package tablelayout
 
 import (
 	a "github.com/jpincas/htmlfunc/attributes"
@@ -15,14 +15,14 @@ var (
 	white = css.RGB(255, 255, 255)
 )
 
-// Html is a somewhat opinionated attempt at standardising a wrapper that works well across clients and can be resused for all emails
+// Email is a somewhat opinionated attempt at standardising a wrapper that works well across clients and can be resused for all emails
 // It incorporates the head and body declarations and works its way down to a table wrapper consisting of a single
 // td which then sort of acts as the starting point for building a custom layout,
 // i.e. the attributes and elements you pass in end up in that final td wrapper
 
 // Don't touch this template unless you are happy to spend hours testing the result across email clients,
 // particularly Outlook
-func Html(attrs a.Attributes, sections ...h.Element) h.Element {
+func Email(attrs a.Attributes, sections ...h.Element) h.Element {
 	return h.Html(
 		a.Attrs(
 			a.Xmlns("http://www.w3.org/1999/xhtml"),
