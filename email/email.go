@@ -12,19 +12,22 @@ const (
 )
 
 var (
-	white       = css.RGB(255, 255, 255)
-	neutralGrey = css.RGB(240, 240, 240)
+	white = css.RGB(255, 255, 255)
 )
 
 // Html is a somewhat opinionated attempt at standardising a wrapper that works well across clients and can be resused for all emails
 // It incorporates the head and body declarations and works its way down to a table wrapper consisting of a single
 // td which then sort of acts as the starting point for building a custom layout,
 // i.e. the attributes and elements you pass in end up in that final td wrapper
+
+// Don't touch this template unless you are happy to spend hours testing the result across email clients,
+// particularly Outlook
 func Html(attrs a.Attributes, sections ...h.Element) h.Element {
 	return h.Html(
 		a.Attrs(
 			a.Xmlns("http://www.w3.org/1999/xhtml"),
 		),
+
 		h.Head(
 			a.Attrs(),
 			h.Meta(a.Attrs(
@@ -49,7 +52,7 @@ func Html(attrs a.Attributes, sections ...h.Element) h.Element {
 					a.CellSpacing(0),
 					a.Width(css.WithUnits(100, css.Percent)),
 					a.Style(
-						css.BackgroundColor(neutralGrey),
+						//css.BackgroundColor(neutralGrey),
 						css.BorderCollapse(css.Collapse),
 					),
 				),
@@ -67,6 +70,8 @@ func Html(attrs a.Attributes, sections ...h.Element) h.Element {
 								a.CellSpacing(0),
 								a.Style(
 									css.BackgroundColor(white),
+
+									// Important to use max-width here in order to avoid scaling on mobile devices
 									css.MaxWidth(css.WithUnits(mainWidth, css.Px)),
 								),
 							),
@@ -75,19 +80,6 @@ func Html(attrs a.Attributes, sections ...h.Element) h.Element {
 					),
 				),
 			),
-		),
-	)
-}
-
-func Section(attrs a.Attributes, els ...h.Element) h.Element {
-	return h.Tr(
-		a.Attrs(),
-		h.Td(
-			a.Attrs1(
-				a.Width(css.WithUnits(100, css.Percent)),
-				attrs,
-			),
-			els...,
 		),
 	)
 }
