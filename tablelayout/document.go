@@ -7,10 +7,15 @@ import (
 )
 
 const (
-	docSectionMargin = 10
+	docSectionMargin       = 20
+	devModeBackgroundColor = "blue"
 )
 
-func Page(attrs a.Attributes, sections ...h.Element) h.Element {
+func Page(devMode bool, attrs a.Attributes, sections ...h.Element) h.Element {
+	if devMode {
+		h.ElementsAppendAttrs(sections, a.Style(css.BackgroundColor(devModeBackgroundColor)))
+	}
+
 	return h.Table(
 		a.Attrs4(
 			a.CellPadding(0),
@@ -29,8 +34,8 @@ func Page(attrs a.Attributes, sections ...h.Element) h.Element {
 				h.Table(
 					a.Attrs(
 						a.Width(css.WithUnits(100, css.Percent)),
-						a.CellPadding(docSectionMargin),
-						a.CellSpacing(0),
+						a.CellPadding(0),
+						a.CellSpacing(docSectionMargin),
 					),
 					sections...,
 				),
