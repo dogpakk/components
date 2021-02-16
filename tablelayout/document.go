@@ -28,6 +28,7 @@ func Page(attrs a.Attributes, sections ...h.Element) h.Element {
 				attrs,
 				h.Table(
 					a.Attrs(
+						a.Width(css.WithUnits(100, css.Percent)),
 						a.CellPadding(docSectionMargin),
 						a.CellSpacing(0),
 					),
