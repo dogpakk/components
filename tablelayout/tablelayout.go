@@ -8,7 +8,9 @@ import (
 
 func Section(attrs a.Attributes, els ...h.Element) h.Element {
 	return h.Tr(
-		a.Attrs(),
+		a.Attrs(
+			a.Class("section-tr"),
+		),
 		h.Td(
 			a.Attrs1(
 				a.Width(css.WithUnits(100, css.Percent)),

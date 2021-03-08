@@ -23,6 +23,7 @@ type ComplexTable struct {
 	LastRowAttrs, LastRowCellAttrs         attributes.Attributes
 	FirstColumnCellAttrs                   attributes.Attributes
 	BodyAttrs, BodyRowAttrs, BodyCellAttrs attributes.Attributes
+	NthColumnCellAttrs                     map[int]attributes.Attributes
 }
 
 // ConstructComplexTable is for constructing more complex tables with inline attributes
@@ -51,6 +52,8 @@ func (complexTable ComplexTable) Render() h.Element {
 			cellAttrs_ := cellAttrs
 			if i == 0 {
 				cellAttrs_ = complexTable.FirstColumnCellAttrs
+			} else if overrideAttrs, ok := complexTable.NthColumnCellAttrs[i]; ok {
+				cellAttrs_ = overrideAttrs
 			}
 
 			tableCells = append(tableCells, h.Td(cellAttrs_, cellValue))
